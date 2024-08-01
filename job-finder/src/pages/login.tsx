@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
+import { useAuthStore } from '@/app/store';
 import { useRouter } from 'next/navigation';
 
 interface LoginProps {
@@ -9,23 +9,14 @@ interface LoginProps {
 }
 
 const Login: React.FC<LoginProps> = ({ onClose, onSwitchToSignup }) => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
-  const [errorMessage, setErrorMessage] = useState<string | null>(null); 
+  const { register, handleSubmit } = useForm();
+  const { login, errorMessage } = useAuthStore();
   const router = useRouter();
 
   const onSubmit = async (data: any) => {
-    try {
-      const response = await axios.post('https://novel-project-ntj8t.ampt.app/api/login', data);
-      const { accessToken } = response.data;
-      localStorage.setItem('accessToken', accessToken);
+    await login(data.email, data.password);
+    if (!useAuthStore.getState().errorMessage) {
       router.push('/jobs');
-    } catch (error: any) {
-      // Check if error is a response from server
-      if (error.response && error.response.data) {
-        setErrorMessage(error.response.data.message || 'An error occurred');
-      } else {
-        setErrorMessage('An error occurred');
-      }
     }
   };
 

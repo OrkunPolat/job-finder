@@ -1,29 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
-
+import { useAuthStore } from '@/app/store';
 interface SignupProps {
   onClose: () => void;
   onSwitchToLogin: () => void;
 }
 
 const Signup: React.FC<SignupProps> = ({ onClose, onSwitchToLogin }) => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const { register, handleSubmit } = useForm();
+  const { register: registerUser, errorMessage } = useAuthStore();
 
   const onSubmit = async (data: any) => {
-    try {
-      const response = await axios.post('https://novel-project-ntj8t.ampt.app/api/register', data);
-      console.log(response.data);
-    } catch (error: any) {
-      if (error.response && error.response.data) {
-        setErrorMessage(error.response.data.message || 'An error occurred');
-      } else {
-        setErrorMessage('An error occurred'); 
-      }
-    }
+    await registerUser(data.email, data.password);
+    onSwitchToLogin();
   };
-
   return (
     <div className="fixed inset-0 flex justify-center items-center z-50">
       <div className="bg-white p-8 rounded shadow-lg max-w-md w-full relative lg:mb-36 mb-64">
