@@ -225,10 +225,10 @@ const Jobs: React.FC = () => {
       {/* Right Section */}
       <aside className="lg:w-1/3 p-4 bg-[#ffffff] lg:h-screen overflow-auto lg:border-l border-[#9aafbb] mt-10 lg:mt-0">
         <div className="flex flex-col items-center lg:mt-20">
-          <div className="w-24 h-24 border-2 border-[#66bb6a] rounded-full bg-[#e0f2f1] lg:ml-10 ml-0"></div>
-          <span className="mt-2 font-semibold text-[#2f4451] lg:ml-10 ml-0">hr@shft.co</span>
+          <div className="w-24 h-24 border-2 border-[#66bb6a] rounded-full bg-[#e0f2f1]  ml-0"></div>
+          <span className="mt-2 font-semibold text-[#2f4451]  ml-0">hr@shft.co</span>
         </div>
-        <h2 className="text-xl font-bold mt-4 lg:mt-8 lg:ml-10 text-[#2f4451] text-center mb-8">Applied Jobs</h2>
+        <h2 className="text-xl font-bold mt-4 lg:mt-8  text-[#2f4451] text-center mb-8">Applied Jobs</h2>
         <ul className="mt-2 lg:ml-10 mr-0 lg:mr-10">
           {appliedJobs.map((job) => (
             <li key={job.id} className="border-2 border-[#66bb6a] p-4 mt-2 bg-[#ffffff] shadow-md rounded-lg font-semibold text-center">
