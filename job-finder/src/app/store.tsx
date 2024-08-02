@@ -24,7 +24,6 @@ export const useAuthStore = create<AuthState>((set) => ({
       const { accessToken, user } = response.data;
       set({ isAuthenticated: true, accessToken, user, errorMessage: null });
       localStorage.setItem('accessToken', accessToken);
-      console.log('Login successful:', user);
     } catch (error: any) {
       const message = error.response?.data.message || 'An error occurred';
       set({ errorMessage: message });
@@ -35,14 +34,12 @@ export const useAuthStore = create<AuthState>((set) => ({
   logout: () => {
     localStorage.removeItem('accessToken');
     set({ isAuthenticated: false, user: null, accessToken: null });
-    console.log('Logged out successfully');
   },
 
   register: async (email: string, password: string) => {
     try {
       await axios.post('https://novel-project-ntj8t.ampt.app/api/register', { email, password });
       set({ errorMessage: null });
-      console.log('Registration successful');
     } catch (error: any) {
       const message = error.response?.data.message || 'An error occurred';
       set({ errorMessage: message });
