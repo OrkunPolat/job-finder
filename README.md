@@ -4,7 +4,7 @@ SHFT_Homework
 
 ## Getting Started
 
- In this project;
+ In this project we used;
 
 - `axios`: A popular library used to make HTTP requests. 
 - `react-hook-form`: It is a library that facilitates form operations.
